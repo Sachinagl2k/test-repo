@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:latest
 RUN npm install -g pa11y --unsafe-perm=true
 RUN apt update -y && \
     apt install -y \
