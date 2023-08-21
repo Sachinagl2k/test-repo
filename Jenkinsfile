@@ -14,7 +14,7 @@ stage('Test URL') {
         
         def reportDir = "${env.WORKSPACE}/reports"
         docker.build('test')
-            .inside("-v ${reportDir}:/reports") {
+            .inside("-v ${reportDir}:/reports -u root") {
             sh """
                 pa11y --reporter JSON "${SITE_URL}" > /reports/report.json
             """
