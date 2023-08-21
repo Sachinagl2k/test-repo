@@ -6,13 +6,7 @@ properties([
 ])
 
 SITE_URL = params.SITE_URL ?: 'https://www.marutisuzuki.com//'
-stage('Delete workspace before build in martech-windows') {
-                //agent any
-                steps {
-                    //deleteDir()
-                    cleanWs()
-                }
-}
+
 stage('Test URL') {
     node {
         deleteDir()
