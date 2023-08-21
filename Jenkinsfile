@@ -16,7 +16,7 @@ stage('Test URL') {
         docker.build('test')
             .inside("-v ${reportDir}:/reports -u root") {
             sh """
-                pa11y --reporter JSON "${SITE_URL}" > /reports/report.json
+                pa11y --reporter json "${SITE_URL}" > /reports/report.json
             """
         }
         step([$class: 'CopyArtifact', filter: 'report.json', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: [$class: 'StatusBuildSelector', stable: false]])
