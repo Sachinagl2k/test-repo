@@ -12,7 +12,7 @@ stage('Test URL') {
         deleteDir()
         checkout scm
 
-        docker.build('germaniumhq/pa11y')
+        docker.build('test')
             .inside {
             sh """
                 pa11y -c /pa11y.config.json "${SITE_URL}"
