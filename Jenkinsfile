@@ -1,7 +1,6 @@
 properties([
     parameters([
         string(name: 'SITE_URL', defaultValue: 'https://www.marutisuzuki.com/',
-                description: 'URL to test the accesibility against')
     ])
 ])
 
@@ -13,10 +12,10 @@ stage('Test URL') {
         checkout scm
         
         def reportDir = "${env.WORKSPACE}"
-        docker.build('test')
+        docker.build('germaniumhq/pa11y')
             .inside("-v ${reportDir}:/") {
             sh """
-                pa11y --reporter csv https://example.com > report.csv
+                pa11y --reporter csv "${SITE_URL}" > report.csv
             """
         }
         step([$class: 'CopyArtifact', filter: 'report.json', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: [$class: 'StatusBuildSelector', stable: false]])
