@@ -11,11 +11,11 @@ stage('Test URL') {
     node {
         deleteDir()
         checkout scm
-
+        def reportDir = /home/ec2-user/workspace/MARTECH/LQS/test_LQS
         docker.build('test')
-            .inside {
+            .inside("-v ${reportDir}:/reports") {
             sh """
-                pa11y --reporter "${SITE_URL}" > report.json
+                pa11y --reporter "${SITE_URL}" > /reports/report.json
             """
         }
     }
