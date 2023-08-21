@@ -8,19 +8,15 @@ properties([
 SITE_URL = params.SITE_URL ?: 'https://www.marutisuzuki.com//'
 
 stage('Test URL') {
-    steps {
-            script
-                        {
-                            sh 'deleteDir()'
-                            sh 'checkout scm'
-                            sh 'def reportDir = /home/ec2-user/workspace/MARTECH/LQS/test_LQS'
-                            docker.build('test')
-                            .inside("-v ${reportDir}:/reports") {
-                            sh """
-                                pa11y --reporter "${SITE_URL}" > /reports/report.json
-                            """
-                            }
-    }
-    }
-}
+    node {
+        deleteDir()
+        checkout scm
 
+        docker.build('test')
+            .inside {
+            sh """
+                pa11y --reporter JSON "${SITE_URL}" > report.json
+            """
+        }
+    }
+} 
