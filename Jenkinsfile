@@ -15,7 +15,7 @@ stage('Test URL') {
         def reportDir = "${env.WORKSPACE}/reports"
         
         // Use the 'docker.image().inside()' block correctly
-        docker.image('germaniumhq/pa11y').inside("--privileged -v ${reportDir}:/reports") {
+        docker.image('test').inside("--privileged -v ${reportDir}:/reports") {
             sh """
                 pa11y --reporter csv "${SITE_URL}" > /reports/report.csv
             """
