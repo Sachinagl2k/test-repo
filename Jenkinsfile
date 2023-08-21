@@ -8,7 +8,7 @@ properties([
 SITE_URL = params.SITE_URL ?: 'https://www.marutisuzuki.com//'
 
 stage('Test URL') {
-    node {
+    //node {
         deleteDir()
         checkout scm
         def reportDir = /home/ec2-user/workspace/MARTECH/LQS/test_LQS
@@ -17,7 +17,7 @@ stage('Test URL') {
             sh """
                 pa11y --reporter "${SITE_URL}" > /reports/report.json
             """
-        }
+        //}
     }
 }
 
