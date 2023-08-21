@@ -14,13 +14,13 @@ stage('Test URL') {
                             sh 'deleteDir()'
                             sh 'checkout scm'
                             sh 'def reportDir = /home/ec2-user/workspace/MARTECH/LQS/test_LQS'
-                            sh 'docker.build('test')
-                                .inside("-v ${reportDir}:/reports") {
-                                sh """
-                                    pa11y --reporter "${SITE_URL}" > /reports/report.json
-                                """
-                                }'
-        }
+                            docker.build('test')
+                            .inside("-v ${reportDir}:/reports") {
+                            sh """
+                                pa11y --reporter "${SITE_URL}" > /reports/report.json
+                            """
+                            }
+    }
     }
 }
 
