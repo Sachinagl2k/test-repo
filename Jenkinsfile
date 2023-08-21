@@ -15,7 +15,7 @@ stage('Test URL') {
         docker.build('test')
             .inside {
             sh """
-                pa11y -c /pa11y.config.json "${SITE_URL}"
+                pa11y -c --reporter json /pa11y.config.json "${SITE_URL}" > report.json
             """
         }
     }
