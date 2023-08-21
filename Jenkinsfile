@@ -1,6 +1,7 @@
 properties([
     parameters([
-        string(name: 'SITE_URL', defaultValue: 'https://www.marutisuzuki.com/',
+        string(name: 'SITE_URL', defaultValue: 'http://germaniumhq.com/',
+                description: 'URL to test the accesibility against')
     ])
 ])
 
