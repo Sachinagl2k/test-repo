@@ -1,11 +1,11 @@
 properties([
     parameters([
-        string(name: 'SITE_URL', defaultValue: 'http://germaniumhq.com/',
+        string(name: 'SITE_URL', defaultValue: 'https://www.marutisuzuki.com/',
                 description: 'URL to test the accesibility against')
     ])
 ])
 
-SITE_URL = params.SITE_URL ?: 'http://germaniumhq.com/'
+SITE_URL = params.SITE_URL ?: 'https://www.marutisuzuki.com//'
 
 stage('Test URL') {
     node {
