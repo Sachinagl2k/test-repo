@@ -12,11 +12,11 @@ stage('Test URL') {
         deleteDir()
         checkout scm
         
-        def reportDir = "${env.WORKSPACE}/reports"
+        def reportDir = "${env.WORKSPACE}"
         docker.build('test')
-            .inside("-v ${reportDir}:/reports -u root") {
+            .inside("-v ${reportDir}:/") {
             sh """
-                pa11y --reporter json "${SITE_URL}" > /reports/report.json
+                pa11y --reporter csv https://example.com > report.csv
             """
         }
         step([$class: 'CopyArtifact', filter: 'report.json', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: [$class: 'StatusBuildSelector', stable: false]])
